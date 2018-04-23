@@ -3,7 +3,7 @@ version: '3'
 services:
   redis:
     image: redis:latest
-    container_name: resis
+    container_name: redis
     ports:
       - "6379:6379"
     volumes:
@@ -16,9 +16,19 @@ services:
       - "15673:15672"
       - "5673:5672"
     volumes:
-      - /home/oliver/docker/rabbitmaq_data:/var/lib/rabbitmq
+      - /home/oliver/docker/rabbitmq_data:/var/lib/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=kidsnote
       - RABBITMQ_DEFAULT_PASS=kidsnote
       - RABBITMQ_DEFAULT_VHOST=default
 
+  db:
+    image: mariadb:latest
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    container_name: db
+    ports:
+      - "33306:3306"
+    volumes:
+      - /home/oliver/docker/db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1

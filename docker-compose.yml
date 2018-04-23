@@ -1,26 +1,24 @@
 version: '3'
 
 services:
-	redis:
-		image: redis:latest
-		container_name: resis
-		restart: always
-		port:
-			- "6379:6379"
-		volumes:
-			- /home/oliver/docker/redis_data:/data
+  redis:
+    image: redis:latest
+    container_name: resis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /home/oliver/docker/redis_data:/data
 
-	rabbitmq:
-		image: rabbitmq:3-management
-		container_name: rabbitmq
-		restart: always
-		ports:
-			- "15672:15672"
-			- "5672:5672"
-		volumes:
-			- /home/oliver/docker/rabbitmaq_data:/var/lib/rabbitmq
-		environment:
-			- RABBITMQ_DEFAULT_USER=kidsnote
-			- RABBITMQ_DEFAULT_PASS=kidsnote
-			- RABBITMQ_DEFAULT_VHOST=default
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "15673:15672"
+      - "5673:5672"
+    volumes:
+      - /home/oliver/docker/rabbitmaq_data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=kidsnote
+      - RABBITMQ_DEFAULT_PASS=kidsnote
+      - RABBITMQ_DEFAULT_VHOST=default
 

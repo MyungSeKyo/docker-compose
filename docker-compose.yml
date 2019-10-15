@@ -7,7 +7,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - /home/oliver/docker/redis_data:/data
+      - /home/oliver/docker/redis.conf:/usr/local/etc/redis/redis.conf
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -32,3 +32,14 @@ services:
       - /home/oliver/docker/db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=1
+
+  worker:
+    image: dockerkrane:latest
+    command: tail -f /dev/null
+    container_name: worker
+    volumes:
+      - /home/oliver/docker/db_data/conf.d/silver_bullet:/etc/mysql/conf.d/silver_bullet
+    links:
+      - db:db.docker
+      - redis:redis.docker
+      - rabbitmq:rabbitmq.docker

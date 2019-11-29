@@ -13,8 +13,8 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "15673:15672"
-      - "5673:5672"
+      - "15672:15672"
+      - "5672:5672"
     volumes:
       - /home/oliver/docker/rabbitmq_data:/var/lib/rabbitmq
     environment:
